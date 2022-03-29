@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Home - Portfolio</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
+		<script defer src="js/fontawesome-all.min.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+		<script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth-compat.js"></script>
+        <script type="text/javascript">
+            const firebaseConfig = {
+              apiKey: "AIzaSyC8arREOkbxkMkS88Rum6EZTLjutUxYsK8",
+              authDomain: "auth-example-c2a93.firebaseapp.com",
+              projectId: "auth-example-c2a93",
+              storageBucket: "auth-example-c2a93.appspot.com",
+              messagingSenderId: "598066978353",
+              appId: "1:598066978353:web:7bfb5ca10a38711f13bf10"
+            };
+          
+            // Initialize Firebase
+            const app = firebase.initializeApp(firebaseConfig);
+        </script>
+    <script type="text/javascript">
+      initApp = function() {
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            // User is signed in.
+            var displayName = user.displayName;
+            var email = user.email;
+            var emailVerified = user.emailVerified;
+            var photoURL = user.photoURL;
+            var uid = user.uid;
+            var phoneNumber = user.phoneNumber;
+            var providerData = user.providerData;
+            user.getIdToken().then(function(accessToken) {
+              document.getElementById('sign-in-status').textContent = 'Logged';
+              document.getElementById('sign-in').textContent = 'Sign out';
+			  document.getElementById('name').textContent = displayName;
+			  document.getElementById('email').textContent = email;
+			  document.getElementById('phoneNumber').textContent = phoneNumber;
+			  document.getElementById('photoURL').src = photoURL;
+			  document.getElementById('sign-in').textContent = 'Sign out';
+				document.getElementById('sign-in').addEventListener('click', function(event) {
+				firebase.auth().signOut();
+				setTimeout(function () {
+					location.replace('/public');
+				}, 1000);                
+				});
+            });
+          } else {
+            // User is signed out.
+            document.getElementById('sign-in-status').textContent = 'Signed out';
+            document.getElementById('sign-in').textContent = 'Logged';
+            document.getElementById('account-details').textContent = 'null';
+          }
+        }, function(error) {
+          console.log(error);
+        });
+      };
+
+      window.addEventListener('load', function() {
+        initApp()
+      });
+    </script>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container">
+				<a class="navbar-brand" href="front.html" style="font-family: 'Papyrus', fantasy;">
+					<img class="rounded-circle align-middle me-2" id="photoURL" src="img/coral.png" alt="PP">
+					GifsWeb
+				</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbar">
+					<ul class="navbar-nav ms-auto">
+						<!-- <li class="nav-item active" aria-current="page">
+							<a class="nav-link" href="front.html">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="portafolio.html">Portfolio</a>
+						</li> -->
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                          </button>
+                          <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                            <ul class="navbar-nav">
+                              <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Signed In
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                    <li><a class="dropdown-item"><div id="name"></div></a></li>
+                                    <li><a class="dropdown-item"><div id="email"></div></a></li>
+                                    <li><a class="dropdown-item"><div id="phoneNumber"></div></a></li>
+                                    <li><a id="sign-in" clas="dropdown-item" role="button"></a></li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </div>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div id="sign-in-status" style="color: white;"></div>
+		<a id="sign-in" clas="btn btn-primary" role="button"></a>
+		<div id="name"></div>
+		<div id="email"></div>
+		<div id="phoneNumber"></div>
+		<p>nose</p>
+
+  		<script src="js/bootstrap.bundle.min.js"></script>
+		  <script>
+				var ui = new firebaseui.auth.AuthUI(firebase.auth());
+		  </script>
+	</body>
+</html>

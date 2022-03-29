@@ -19,3 +19,13 @@ html {
     margin-top: 25px;
     color: black;
 }
+
+.nav-link{
+    color: white;
+    font-family: "Papyrus", fantasy;
+}
+
+.nav-link:hover {
+    background-color: lightcoral;
+    color: white;
+  }
