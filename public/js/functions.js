@@ -5,7 +5,7 @@ const key = {
 }
 
 function feedLike(){
-    const fetchURL = fetch(`http://api.giphy.com/v1/gifs/trending?api_key=${key.giphy}&limit=30`)
+    const fetchURL = fetch(`https://api.giphy.com/v1/gifs/trending?api_key=${key.giphy}&limit=30`)
 
     fetchURL.then(response => {
         const URLPromise = response.json();
@@ -45,7 +45,7 @@ function removeAllChildNodes(parent) {
 function Search() {
     searchLinks =[]
     const searchItem = document.getElementById('searchbox').value
-    const fetchURLSearch = fetch(`http://api.giphy.com/v1/gifs/search?api_key=${key.giphy}&q=${searchItem}&limit=30`)
+    const fetchURLSearch = fetch(`https://api.giphy.com/v1/gifs/search?api_key=${key.giphy}&q=${searchItem}&limit=30`)
     fetchURLSearch.then(response => {
         const URLPromise = response.json();
         URLPromise.then(json => {
@@ -82,7 +82,7 @@ function loadMore(){
     allLinksMore = []
     randomOffset = Math.floor((Math.random() * 4999) + 1);
     
-    const fetchURLMore = fetch(`http://api.giphy.com/v1/gifs/trending?api_key=${key.giphy}&limit=30&offset=${randomOffset}`)
+    const fetchURLMore = fetch(`https://api.giphy.com/v1/gifs/trending?api_key=${key.giphy}&limit=30&offset=${randomOffset}`)
     fetchURLMore.then(response => {
         const URLPromise = response.json();
         URLPromise.then(json => {
